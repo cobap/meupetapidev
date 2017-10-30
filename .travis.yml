@@ -22,7 +22,7 @@ deploy:
   app: meupetapidev
   strategy: git
   run:
-    - python meupetapidev/manage.py makemigrations api
-    - python meupetapidev/manage.py migrate
+    - python meupetapi/manage.py makemigrations api
+    - python meupetapi/manage.py migrate
 
-script: python meupetapidev/manage.py test api
+script: python meupetapi/manage.py test api

@@ -1,6 +1,6 @@
 import dj_database_url
 
-from meupetapidev.settings import *
+from meupetapi.settings import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
