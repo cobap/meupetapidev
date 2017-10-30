@@ -308,8 +308,8 @@ class TipoUsuarioMethodTest(TestCase):
 
 ################################3
 
-class PetModelTransactionTestCase(TransactionTestCase):
-    fixtures = ['api/fixtures/unit-test.json']
+# class PetModelTransactionTestCase(TransactionTestCase):
+#     fixtures = ['api/fixtures/unit-test.json']
 
-    def test_fixtures_load(self):
-        self.assertTrue(Pet.objects.count() > 0)
+#     def test_fixtures_load(self):
+#         self.assertTrue(Pet.objects.count() > 0)
