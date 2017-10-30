@@ -306,7 +306,8 @@ class TipoUsuarioMethodTest(TestCase):
         response2 = self.client.get('/api/v1/tipousuario/1/')
         self.assertEqual(response2.data, {'id': 1, 'descricao': 'Pet Walker'})
 
-################################3
+##############TESTES DE INTEGRAÇÃO#################
+
 
 # class PetModelTransactionTestCase(TransactionTestCase):
 #     fixtures = ['api/fixtures/unit-test.json']
