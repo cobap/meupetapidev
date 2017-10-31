@@ -1,5 +1,4 @@
 import dj_database_url
-
 from meupetapi.settings import *
 
 DEBUG = True
