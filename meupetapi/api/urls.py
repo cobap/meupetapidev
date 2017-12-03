@@ -32,6 +32,10 @@ urlpatterns = [
 	url(r'^tipousuario/$', views.ListCreateTipoUsuario.as_view(), name='tipousuario_list'),
 	url(r'tipousuario/(?P<pk>\d+)/$', views.RetrieveUpdateDestroyTipoUsuario.as_view(), name='tipousuario_detail'),
 
+	#URLs do Servico
+	url(r'^servico/$', views.ListCreateServico.as_view(), name='servico_list'),
+	url(r'servico/(?P<pk>\d+)/$', views.RetrieveUpdateDestroyServico.as_view(), name='servico_detail'),
+
 	# jsi18n can be anything you like here
 	url(r'^jsi18n/$', JavaScriptCatalog.as_view(), js_info_dict),
 

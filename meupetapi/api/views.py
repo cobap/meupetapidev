@@ -60,3 +60,12 @@ class ListCreateTipoUsuario(generics.ListCreateAPIView):
 class RetrieveUpdateDestroyTipoUsuario(generics.RetrieveUpdateDestroyAPIView):
 	queryset = models.TipoUsuario.objects.all()
 	serializer_class = serializers.TipoUsuarioSerializer
+
+#Métodos do TipoUsuario
+class ListCreateServico(generics.ListCreateAPIView):
+	queryset = models.Servico.objects.all()
+	serializer_class = serializers.ServicoSerializer
+
+class RetrieveUpdateDestroyServico(generics.RetrieveUpdateDestroyAPIView):
+	queryset = models.Servico.objects.all()
+	serializer_class = serializers.ServicoSerializer

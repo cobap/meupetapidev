@@ -72,3 +72,12 @@ class PasseioSerializer(serializers.ModelSerializer):
 			'recorrencias',
 		)
 		model = models.Passeio
+
+class ServicoSerializer(serializers.ModelSerializer):
+	class Meta:
+		fields = (
+			'id',
+			'tipoPasseio',
+			'passeador',
+		)
+		model = models.Servico

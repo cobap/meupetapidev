@@ -52,6 +52,9 @@ class Passeador(models.Model):
 	estaPasseando = models.BooleanField()
 	email = models.EmailField(max_length=255)
 
+	def __str__(self):
+		return self.primeiroNome
+
 class Passeio(models.Model):
 	id = models.AutoField(primary_key=True)
 	duracao = models.DurationField()
@@ -64,3 +67,15 @@ class Passeio(models.Model):
 	idRecorrencia = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, default=None, null=True)
 	recorrencias = RecurrenceField(include_dtstart=False, blank=True, default=None, null=True)
 	# fotoDoPasseio = models.ImageField()
+
+class Servico(models.Model):
+	id = models.AutoField(primary_key=True)
+	TIPO_PASSEIO = (
+		('P', 'Passeio'),
+		('B', 'Banho'),
+		('V', 'Veterinario'),
+		('T', 'Treinamento'),
+	)
+	tipoPasseio = models.CharField(max_length=1, choices=TIPO_PASSEIO)
+	passeador = models.ForeignKey(Passeador, on_delete=models.CASCADE, blank=True, default=None)
+
