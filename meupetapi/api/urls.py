@@ -11,8 +11,10 @@ js_info_dict = {
 
 urlpatterns = [
 	#URLs do Usuario
-	url(r'^usuario/$', views.ListCreateUsuario.as_view(), name='usuario_list'),
-	url(r'^usuario/(?P<pk>\d+)/$', views.RetrieveUpdateDestroyUsuario.as_view(), name='usuario_detail'),
+	url(r'^usuario/new/$', views.CreateUsuario.as_view(), name='usuario_create'),
+	url(r'^usuario/list/$', views.ListUsuario.as_view(), name='usuario_list'),
+	url(r'^usuario/(?P<pk>\d+)/rd/$', views.RetrieveDestroyUsuario.as_view(), name='usuario_detail_rd'),
+	url(r'^usuario/(?P<pk>\d+)/u/$', views.UpdateUsuario.as_view(), name='usuario_detail_u'),
 
 	#URLs do Pet
 	url(r'^pet/$', views.ListCreatePet.as_view(), name='pets_list'),
@@ -35,6 +37,8 @@ urlpatterns = [
 	#URLs do Servico
 	url(r'^servico/$', views.ListCreateServico.as_view(), name='servico_list'),
 	url(r'servico/(?P<pk>\d+)/$', views.RetrieveUpdateDestroyServico.as_view(), name='servico_detail'),
+
+	url(r'^login/$', views.Login.as_view(), name='login'),
 
 	# jsi18n can be anything you like here
 	url(r'^jsi18n/$', JavaScriptCatalog.as_view(), js_info_dict),

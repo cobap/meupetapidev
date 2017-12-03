@@ -17,7 +17,7 @@ class TipoUsuarioListingField(serializers.RelatedField):
 	def display_value(self, instance):
 		return '%s' % (instance.descricao)
 
-class UsuarioSerializer(serializers.ModelSerializer):
+class CreateUsuarioSerializer(serializers.ModelSerializer):
 	tipousuario = TipoUsuarioListingField(read_only=False, many=True, queryset=models.TipoUsuario.objects.all())
 	class Meta:
 		fields = (
@@ -27,6 +27,20 @@ class UsuarioSerializer(serializers.ModelSerializer):
 			'idade',
 			'email',
 			'senha',
+			'descricaoUsuario',
+			'tipousuario',
+		)
+		model = models.Usuario
+
+class ListUsuarioSerializer(serializers.ModelSerializer):
+	tipousuario = TipoUsuarioListingField(read_only=False, many=True, queryset=models.TipoUsuario.objects.all())
+	class Meta:
+		fields = (
+			'id',
+			'primeiroNome',
+			'segundoNome',
+			'idade',
+			'email',
 			'descricaoUsuario',
 			'tipousuario',
 		)

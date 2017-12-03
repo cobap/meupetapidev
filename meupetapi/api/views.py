@@ -1,17 +1,37 @@
 #-*- coding: utf-8 -*-
 from rest_framework import generics
+from django.http import HttpResponse
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 
 from . import models
 from . import serializers
 
-#Método do Usuário
-class ListCreateUsuario(generics.ListCreateAPIView):
-	queryset = models.Usuario.objects.all()
-	serializer_class = serializers.UsuarioSerializer
+class JSONResponse(HttpResponse):
+    """
+    An HttpResponse that renders its content into JSON.
+    """
+    def __init__(self, data, **kwargs):
+        content = JSONRenderer().render(data)
+        kwargs['content_type'] = 'application/json'
+        super(JSONResponse, self).__init__(content, **kwargs)
 
-class RetrieveUpdateDestroyUsuario(generics.RetrieveUpdateDestroyAPIView):
+#Método do Usuário
+class CreateUsuario(generics.CreateAPIView):
 	queryset = models.Usuario.objects.all()
-	serializer_class = serializers.UsuarioSerializer
+	serializer_class = serializers.CreateUsuarioSerializer
+
+class ListUsuario(generics.ListAPIView):
+	queryset = models.Usuario.objects.all()
+	serializer_class = serializers.ListUsuarioSerializer
+
+class RetrieveDestroyUsuario(generics.RetrieveDestroyAPIView):
+	queryset = models.Usuario.objects.all()
+	serializer_class = serializers.ListUsuarioSerializer
+
+class UpdateUsuario(generics.UpdateAPIView):
+	queryset = models.Usuario.objects.all()
+	serializer_class = serializers.CreateUsuarioSerializer
 
 #Métodos do Pet
 class ListCreatePet(generics.ListCreateAPIView):
@@ -67,5 +87,18 @@ class ListCreateServico(generics.ListCreateAPIView):
 	serializer_class = serializers.ServicoSerializer
 
 class RetrieveUpdateDestroyServico(generics.RetrieveUpdateDestroyAPIView):
+	queryset = models.Servico.objects.all()
+	serializer_class = serializers.ServicoSerializer
+
+#Métodos do Login
+class Login(generics.GenericAPIView):
+	serializer_class = serializers.CreateUsuarioSerializer
+	def post(login, request):
+		queryset = models.Usuario.objects.filter(email=request.data['email'],senha=request.data['senha']).count()
+		if(queryset == 1): return JSONResponse({'result':'OK'})
+		return JSONResponse({'result':'NOK', 'message': 'Login failed'})
+		
+
+class Logout(generics.RetrieveUpdateDestroyAPIView):
 	queryset = models.Servico.objects.all()
 	serializer_class = serializers.ServicoSerializer
