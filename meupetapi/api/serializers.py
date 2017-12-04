@@ -88,10 +88,10 @@ class PasseioSerializer(serializers.ModelSerializer):
 			'local',
 			'data',
 			'descricaoPasseio',
-			'passeador',
 			'pet',
 			'idRecorrencia',
 			'recorrencias',
+			'servico',
 		)
 		model = models.Passeio
 

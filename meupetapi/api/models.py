@@ -55,19 +55,6 @@ class Passeador(models.Model):
 	def __str__(self):
 		return self.primeiroNome
 
-class Passeio(models.Model):
-	id = models.AutoField(primary_key=True)
-	duracao = models.DurationField()
-	origem = models.TextField()
-	local = models.TextField()
-	data = models.DateField()
-	descricaoPasseio = models.TextField()
-	passeador = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-	pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
-	idRecorrencia = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, default=None, null=True)
-	recorrencias = RecurrenceField(include_dtstart=False, blank=True, default=None, null=True)
-	# fotoDoPasseio = models.ImageField()
-
 class Servico(models.Model):
 	id = models.AutoField(primary_key=True)
 	TIPO_PASSEIO = (
@@ -79,3 +66,16 @@ class Servico(models.Model):
 	tipoPasseio = models.CharField(max_length=1, choices=TIPO_PASSEIO)
 	passeador = models.ForeignKey(Passeador, on_delete=models.CASCADE, blank=True, default=None)
 
+class Passeio(models.Model):
+	id = models.AutoField(primary_key=True)
+	duracao = models.DurationField()
+	origem = models.TextField()
+	local = models.TextField()
+	data = models.DateField()
+	descricaoPasseio = models.TextField()
+	#passeador = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+	pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+	idRecorrencia = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, default=None, null=True)
+	recorrencias = RecurrenceField(include_dtstart=False, blank=True, default=None, null=True)
+	# fotoDoPasseio = models.ImageField()
+	servico = models.ForeignKey(Servico, on_delete=models.CASCADE, blank=True, default=None)

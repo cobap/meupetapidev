@@ -71,7 +71,7 @@ class GetPasseiosByPet(generics.ListAPIView):
 class GetPasseiosByPasseador(generics.ListAPIView):
 	serializer_class = serializers.PasseioSerializer
 	def get_queryset(self):
-		queryset = models.Passeio.objects.filter(passeador=self.kwargs['passeador'])
+		queryset = models.Passeio.objects.filter(servico__passeador=self.kwargs['passeador'])
 		return queryset
 
 #Métodos do TipoUsuario
