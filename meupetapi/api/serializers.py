@@ -32,7 +32,7 @@ class CreateUsuarioSerializer(serializers.ModelSerializer):
 		)
 		model = models.Usuario
 
-class ListUsuarioSerializer(serializers.ModelSerializer):
+class UsuarioSerializer(serializers.ModelSerializer):
 	tipousuario = TipoUsuarioListingField(read_only=False, many=True, queryset=models.TipoUsuario.objects.all())
 	class Meta:
 		fields = (
@@ -43,6 +43,14 @@ class ListUsuarioSerializer(serializers.ModelSerializer):
 			'email',
 			'descricaoUsuario',
 			'tipousuario',
+		)
+		model = models.Usuario
+
+class LoginSerializer(serializers.ModelSerializer):
+	class Meta:
+		fields = (
+			'email',
+			'senha',
 		)
 		model = models.Usuario
 

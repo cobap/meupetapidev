@@ -3,6 +3,8 @@ from rest_framework import generics
 from django.http import HttpResponse
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
+from rest_framework.authtoken.models import Token
+#from django.contrib import auth
 
 from . import models
 from . import serializers
@@ -23,11 +25,11 @@ class CreateUsuario(generics.CreateAPIView):
 
 class ListUsuario(generics.ListAPIView):
 	queryset = models.Usuario.objects.all()
-	serializer_class = serializers.ListUsuarioSerializer
+	serializer_class = serializers.UsuarioSerializer
 
 class RetrieveDestroyUsuario(generics.RetrieveDestroyAPIView):
 	queryset = models.Usuario.objects.all()
-	serializer_class = serializers.ListUsuarioSerializer
+	serializer_class = serializers.UsuarioSerializer
 
 class UpdateUsuario(generics.UpdateAPIView):
 	queryset = models.Usuario.objects.all()
@@ -92,10 +94,19 @@ class RetrieveUpdateDestroyServico(generics.RetrieveUpdateDestroyAPIView):
 
 #Métodos do Login
 class Login(generics.GenericAPIView):
-	serializer_class = serializers.CreateUsuarioSerializer
+	serializer_class = serializers.UsuarioSerializer
 	def post(login, request):
-		queryset = models.Usuario.objects.filter(email=request.data['email'],senha=request.data['senha']).count()
-		if(queryset == 1): return JSONResponse({'result':'OK'})
+		queryset = models.Usuario.objects.filter(email=request.data['email'],senha=request.data['senha'])
+		if(queryset.count() == 1): 
+			#token = Token.objects.create(user=queryset[0])
+			#print token.key
+			usuario = {'id': queryset[0].id, 'primeiroNome': queryset[0].primeiroNome, 'segundoNome': queryset[0].segundoNome, 'idade': queryset[0].idade, 'email': queryset[0].email, 'descricaoUsuario': queryset[0].descricaoUsuario, 'regiao': queryset[0].regiao, 'estaPasseando': queryset[0].estaPasseando, 'tipousuario':[]}
+			#tipousuario = []
+			#for val in queryset[0].tipousuario.all():
+			#	tipousuario += val
+			#usuario['tipousuario'] = tipousuario
+			#print usuario
+			return JSONResponse({'result':'OK', 'usuario': usuario})
 		return JSONResponse({'result':'NOK', 'message': 'Login failed'})
 		
 
