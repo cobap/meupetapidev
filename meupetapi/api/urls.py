@@ -11,11 +11,11 @@ js_info_dict = {
 
 urlpatterns = [
 	#URLs do Usuario
-	url(r'^usuario/new/$', views.CreateUsuario.as_view(), name='usuario_create'),
-	url(r'^usuario/list/$', views.ListUsuario.as_view(), name='usuario_list'),
-	url(r'^usuario/(?P<pk>\d+)/rd/$', views.RetrieveDestroyUsuario.as_view(), name='usuario_detail_rd'),
-	url(r'^usuario/(?P<pk>\d+)/u/$', views.UpdateUsuario.as_view(), name='usuario_detail_u'),
 	url(r'^usuario/tipousuario/(?P<tipousuario>\d+)/$', views.GetUsuariosByTipoUsuario.as_view(), name='usuario_tipousuario'),
+
+	url(r'^usuario/registrar/$', views.RegistrarUsuario.as_view(), name='usuario_registrar'),
+	url(r'^usuario/login/$', views.VerificarUsuario.as_view(), name='usuario_verificar'),
+	url(r'^usuario/listar/$', views.ListarUsuario.as_view(), name='usuario_listar'),
 
 	#URLs do Pet
 	url(r'^pet/$', views.ListCreatePet.as_view(), name='pets_list'),

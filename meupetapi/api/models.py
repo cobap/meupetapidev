@@ -1,5 +1,6 @@
 from django.db import models
 from recurrence.fields import RecurrenceField
+from django.contrib.auth.models import User
 
 class TipoUsuario(models.Model):
 	id = models.AutoField(primary_key=True)
@@ -8,13 +9,9 @@ class TipoUsuario(models.Model):
 	def __str__(self):
 		return self.descricao
 
-class Usuario(models.Model):
-	id = models.AutoField(primary_key=True)
+class Usuario(User):
 	primeiroNome = models.CharField(max_length=255)
 	segundoNome = models.CharField(max_length=255)
-	idade = models.DateField(auto_now=False)
-	email = models.EmailField(max_length=255)
-	senha = models.CharField(max_length=30)
 	descricaoUsuario = models.TextField()
 	regiao = models.CharField(max_length=100, default='')
 	estaPasseando = models.BooleanField(default=False)
