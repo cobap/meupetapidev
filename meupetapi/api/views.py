@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.authtoken.models import Token
-#from django.contrib import auth
+from django.contrib.auth import authenticate
 
 from . import models
 from . import serializers
@@ -18,22 +18,26 @@ class JSONResponse(HttpResponse):
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
 
-#Método do Usuário
-class CreateUsuario(generics.CreateAPIView):
-	queryset = models.Usuario.objects.all()
-	serializer_class = serializers.CreateUsuarioSerializer
+class RegistrarUsuario(generics.GenericAPIView):
+	serializer_class = serializers.UsuarioSerializer
+	def post (login, request):
+		user = models.Usuario.objects.create_user(request.data['username'],request.data['email'], request.data['password'])
+		user.save()
+		return JSONResponse({'result':1})
 
-class ListUsuario(generics.ListAPIView):
+class VerificarUsuario(generics.GenericAPIView):
+	serializer_class = serializers.UsuarioSerializer
+	def post (login, request):
+		user = authenticate(username=request.data['username'],password=request.data['password'])
+		if user is not None:
+			return JSONResponse({'result':1})
+		return JSONResponse({'result':0})
+
+#Métodos do Usuario
+class ListarUsuario(generics.ListAPIView):
 	queryset = models.Usuario.objects.all()
 	serializer_class = serializers.UsuarioSerializer
 
-class RetrieveDestroyUsuario(generics.RetrieveDestroyAPIView):
-	queryset = models.Usuario.objects.all()
-	serializer_class = serializers.UsuarioSerializer
-
-class UpdateUsuario(generics.UpdateAPIView):
-	queryset = models.Usuario.objects.all()
-	serializer_class = serializers.CreateUsuarioSerializer
 
 #Métodos do Pet
 class ListCreatePet(generics.ListCreateAPIView):
