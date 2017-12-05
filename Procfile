@@ -1,2 +1,1 @@
-release: python meupetapi/manage.py makemigrations && python meupetapi/manage.py makemigrations api && python meupetapi/manage.py migrate
 web: gunicorn --pythonpath meupetapi meupetapi.deploy --log-file -
