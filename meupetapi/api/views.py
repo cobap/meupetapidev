@@ -29,15 +29,17 @@ class RegistrarUsuario(generics.GenericAPIView):
 		user.segundoNome = request.data['segundoNome']
 		user.tipousuario = request.data['tipousuario']
 		user.save()
-		return Response(serializers.serialize("xml", user), status=status.HTTP_200_OK)
+		usuario_serializado = UsuarioSerializer(user)
+		return Response(usuario_serializado.data, status=status.HTTP_200_OK)
 
 class VerificarUsuario(generics.GenericAPIView):
 	serializer_class = serializers.UsuarioSerializer
 	def post (login, request):
 		user = authenticate(username=request.data['username'],password=request.data['password'])
+		usuario_serializado = UsuarioSerializer(user)
 		if user is not None:
-			return Response(serializers.serialize("xml", user), status=status.HTTP_200_OK)
-		return Response(serializers.serialize("xml", user), status=status.HTTP_401_UNAUTHORIZED)
+			return Response(usuario_serializado.data, status=status.HTTP_200_OK)
+		return Response({'result': 'User not Found'}, status=status.HTTP_401_UNAUTHORIZED)
 
 #Métodos do Usuario
 class ListarUsuario(generics.ListAPIView):
