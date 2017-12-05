@@ -28,6 +28,11 @@ class PasseioMethodTest(TestCase):
         userResponse = self.client.post(url, data, format='json')
         self.userId = userResponse.data['id']
 
+        url = reverse('api:servico_list')
+        data = {'tipoPasseio': 'P', 'passeador': self.userId}
+        servicoResponse = self.client.post(url, data, format='json')
+        self.servicoId = userResponse.data['id']
+
         url = reverse('api:pets_list')
         data = {'dono': self.userId, 'nome': 'Nome do Pet', 'raca': 'Raça 1','tamanho':'M','descricaoPet':'Pet exemplo'}
         petResponse = self.client.post(url, data, format='json')
@@ -38,11 +43,11 @@ class PasseioMethodTest(TestCase):
         local = "local"
         data = '2017-11-01'
         descricaoPasseio = "descrição Passeio teste"
-        passeador = '1'
+        servico = '1'
         pet = self.petId
 
         url = reverse('api:passeio_list')
-        data = {'duracao': duracao, 'origem': origem, 'local': local, 'data': data, 'descricaoPasseio': descricaoPasseio, 'passeador': '1', 'pet': pet}
+        data = {'duracao': duracao, 'origem': origem, 'local': local, 'data': data, 'descricaoPasseio': descricaoPasseio, 'servico': servico, 'pet': pet}
         response = self.client.post(url, data, format='json')
 
     def test_newPasseio(self):
@@ -54,11 +59,11 @@ class PasseioMethodTest(TestCase):
         local = "local 2"
         data = "2017-11-01"
         descricaoPasseio = "descrição Passeio teste 2"
-        passeador = '1'
+        servico = '1'
         pet = '1'
 
         url = reverse('api:passeio_list')
-        data = {'duracao': duracao, 'origem': origem, 'local': local, 'data': data, 'descricaoPasseio': descricaoPasseio, 'passeador': '1', 'pet': '1'}
+        data = {'duracao': duracao, 'origem': origem, 'local': local, 'data': data, 'descricaoPasseio': descricaoPasseio, 'servico': servico, 'pet': '1'}
         response = self.client.post(url, data, format='json')
         #descricao = "descricao Passeio teste"
         #testPasseio = Passeio(duracao);
@@ -78,7 +83,7 @@ class PasseioMethodTest(TestCase):
         """
 
         response2 = self.client.get('/api/v1/passeio/1/')
-        self.assertEqual(response2.data, {'id': 1, 'duracao': '15 00:00:00', 'origem': 'origem', 'local': 'local', 'data': '2017-11-01', 'descricaoPasseio': 'descrição Passeio teste','passeador': 1, 'pet': 1, 'idRecorrencia': None, 'recorrencias': None})
+        self.assertEqual(response2.data, {'id': 1, 'duracao': '15 00:00:00', 'origem': 'origem', 'local': 'local', 'data': '2017-11-01', 'descricaoPasseio': 'descrição Passeio teste','servico': 1, 'pet': 1, 'idRecorrencia': None, 'recorrencias': None})
 
     def test_editPasseio(self):
         """
@@ -87,13 +92,13 @@ class PasseioMethodTest(TestCase):
 
         url = reverse('api:passeio_detail',args=[1])
 
-        data = {'duracao': '15 22:45:00', 'origem': 'origem changed', 'local': 'local', 'data': '2017-11-01', 'descricaoPasseio': 'descrição Passeio teste editada', 'passeador': '1', 'pet': '1'}
+        data = {'duracao': '15 22:45:00', 'origem': 'origem changed', 'local': 'local', 'data': '2017-11-01', 'descricaoPasseio': 'descrição Passeio teste editada', 'servico': '1', 'pet': '1'}
         response = self.client.patch(url, json.dumps(data), content_type='application/json')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         response2 = self.client.get('/api/v1/passeio/1/')
-        self.assertEqual(response2.data, {'id': 1, 'duracao': '15 22:45:00', 'origem': 'origem changed', 'local': 'local', 'data': '2017-11-01', 'descricaoPasseio': 'descrição Passeio teste editada', 'idRecorrencia': None, 'recorrencias': None, 'passeador': 1, 'pet': 1})
+        self.assertEqual(response2.data, {'id': 1, 'duracao': '15 22:45:00', 'origem': 'origem changed', 'local': 'local', 'data': '2017-11-01', 'descricaoPasseio': 'descrição Passeio teste editada', 'idRecorrencia': None, 'recorrencias': None, 'servico': 1, 'pet': 1})
 
 class PasseadorMethodTest(TestCase):
 
