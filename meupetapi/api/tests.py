@@ -28,14 +28,14 @@ class PasseioMethodTest(TestCase):
         userResponse = self.client.post(url, data, format='json')
         self.userId = userResponse.data['id']
 
-        url = reverse('api:servico_list')
-        data = {'tipoPasseio': 'P', 'passeador': self.userId}
-        servicoResponse = self.client.post(url, data, format='json')
+        url2 = reverse('api:servico_list')
+        data2 = {'tipoPasseio': 'P', 'passeador': self.userId}
+        servicoResponse = self.client.post(url2, data2, format='json')
         #self.servicoId = servicoResponse.data['id']
 
-        url = reverse('api:pets_list')
-        data = {'dono': self.userId, 'nome': 'Nome do Pet', 'raca': 'Raça 1','tamanho':'M','descricaoPet':'Pet exemplo'}
-        petResponse = self.client.post(url, data, format='json')
+        url3 = reverse('api:pets_list')
+        data3 = {'dono': self.userId, 'nome': 'Nome do Pet', 'raca': 'Raça 1','tamanho':'M','descricaoPet':'Pet exemplo'}
+        petResponse = self.client.post(url3, data3, format='json')
         self.petId = petResponse.data['id']
 
         duracao = timedelta(15)
@@ -46,9 +46,9 @@ class PasseioMethodTest(TestCase):
         servico = '1'
         pet = self.petId
 
-        url = reverse('api:passeio_list')
-        data = {'duracao': duracao, 'origem': origem, 'local': local, 'data': data, 'descricaoPasseio': descricaoPasseio, 'servico': '1', 'pet': pet}
-        response = self.client.post(url, data, format='json')
+        url4 = reverse('api:passeio_list')
+        data4 = {'duracao': duracao, 'origem': origem, 'local': local, 'data': data, 'descricaoPasseio': descricaoPasseio, 'servico': '1', 'pet': pet}
+        response = self.client.post(url4, data4, format='json')
 
     def test_newPasseio(self):
         """
