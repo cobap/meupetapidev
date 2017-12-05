@@ -62,16 +62,32 @@ class RetrieveUpdateDestroyPasseio(generics.RetrieveUpdateDestroyAPIView):
 	queryset = models.Passeio.objects.all()
 	serializer_class = serializers.PasseioSerializer
 
+#passeios de um pet, para que seu dono possa planejar a agenda
 class GetPasseiosByPet(generics.ListAPIView):
 	serializer_class = serializers.PasseioSerializer
 	def get_queryset(self):
 		queryset = models.Passeio.objects.filter(pet=self.kwargs['pet'])
 		return queryset
 
+#passeios de um passeador, para que ele possa planejar sua agenda
 class GetPasseiosByPasseador(generics.ListAPIView):
 	serializer_class = serializers.PasseioSerializer
 	def get_queryset(self):
 		queryset = models.Passeio.objects.filter(servico__passeador=self.kwargs['passeador'])
+		return queryset
+
+#servicos oferecidos por um passeador, para que eu possa buscar na hora de contratar
+class GetServicosByPasseador(generics.ListAPIView):
+	serializer_class = serializers.ServicoSerializer
+	def get_queryset(self):
+		queryset = models.Servico.objects.filter(passeador=self.kwargs['passeador'])
+		return queryset
+
+#todos os passeios de todos os pets de um mesmo dono, para que ele possa programar sua agenda
+class GetPasseiosByDono(generics.ListAPIView):
+	serializer_class = serializers.PasseioSerializer
+	def get_queryset(self):
+		queryset = models.Passeio.objects.filter(pet__dono=self.kwargs['dono'])
 		return queryset
 
 #Métodos do TipoUsuario

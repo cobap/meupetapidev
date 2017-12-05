@@ -28,7 +28,8 @@ urlpatterns = [
 	url(r'^passeio/$', views.ListCreatePasseio.as_view(), name='passeio_list'),
 	url(r'passeio/(?P<pk>\d+)/$', views.RetrieveUpdateDestroyPasseio.as_view(), name='passeio_detail'),
 	url(r'passeio/pet/(?P<pet>\d+)/$', views.GetPasseiosByPet.as_view(), name='passeio_pet'),
-	url(r'passeio/passeador/(?P<passeador>\d+)/$', views.GetPasseiosByPasseador.as_view(), name='passeio_passeador'),
+	url(r'^passeio/passeador/(?P<passeador>\d+)/$', views.GetPasseiosByPasseador.as_view(), name='passeio_passeador'),
+	url(r'passeio/dono/(?P<dono>\d+)/$', views.GetPasseiosByDono.as_view(), name='passeio_dono'),
 
 	#URLs do TipoUsuario
 	url(r'^tipousuario/$', views.ListCreateTipoUsuario.as_view(), name='tipousuario_list'),
@@ -37,6 +38,7 @@ urlpatterns = [
 	#URLs do Servico
 	url(r'^servico/$', views.ListCreateServico.as_view(), name='servico_list'),
 	url(r'servico/(?P<pk>\d+)/$', views.RetrieveUpdateDestroyServico.as_view(), name='servico_detail'),
+	url(r'servico/passeador/(?P<passeador>\d+)/$', views.GetServicosByPasseador.as_view(), name='servico_passeador'),
 
 	url(r'^login/$', views.Login.as_view(), name='login'),
 
