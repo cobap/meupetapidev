@@ -21,7 +21,11 @@ class JSONResponse(HttpResponse):
 class RegistrarUsuario(generics.GenericAPIView):
 	serializer_class = serializers.UsuarioSerializer
 	def post (login, request):
-		user = models.Usuario.objects.create_user(request.data['username'],request.data['email'], request.data['password'], request.data['tipousuario'], request.data['primeiroNome'],request.data['segundoNome'])
+		# user = models.Usuario.objects.create_user(request.data['username'],request.data['email'], request.data['password'], request.data['primeiroNome'], request.data['segundoNome'],request.data['tipousuario'])
+		user = models.Usuario.objects.create_user(request.data['username'],request.data['email'], request.data['password'])
+		user.primeiroNome = request.data['primeiroNome']
+		user.segundoNome = request.data['segundoNome']
+		user.tipousuario = request.data['tipousuario']
 		user.save()
 		return JSONResponse({'result':1})
 

@@ -16,6 +16,12 @@ class Usuario(User):
 	regiao = models.CharField(max_length=100, default='')
 	estaPasseando = models.BooleanField(default=False)
 	tipousuario = models.ManyToManyField(TipoUsuario)
+	
+	# def __init__(self, primeiroNome, segundoNome, tipousuario):
+	# 	super(models.User, self).__init__(self, *args, **kwargs)
+	# 	self.primeiroNome = primeiroNome
+	# 	self.segundoNome = segundoNome
+	# 	self.tipousuario = tipousuario
 
 	def __str__(self):
 		return self.primeiroNome
