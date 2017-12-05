@@ -24,5 +24,7 @@ deploy:
   run:
     - python meupetapi/manage.py makemigrations api
     - python meupetapi/manage.py migrate
-
+before_script: 
+    - python meupetapi/manage.py makemigrations
+    - python meupetapi/manage.py migrate
 script: python meupetapi/manage.py test api
