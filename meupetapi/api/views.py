@@ -5,6 +5,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
+from rest_framework.response import Response
 
 from . import models
 from . import serializers
@@ -27,15 +28,15 @@ class RegistrarUsuario(generics.GenericAPIView):
 		user.segundoNome = request.data['segundoNome']
 		user.tipousuario = request.data['tipousuario']
 		user.save()
-		return JSONResponse({'result':1})
+		return Response(user, status=status.HTTP_200_OK)
 
 class VerificarUsuario(generics.GenericAPIView):
 	serializer_class = serializers.UsuarioSerializer
 	def post (login, request):
 		user = authenticate(username=request.data['username'],password=request.data['password'])
 		if user is not None:
-			return JSONResponse({'result':1})
-		return JSONResponse({'result':0})
+			return Response(user, status=status.HTTP_200_OK)
+		return Response(user, status=status.HTTP_401_UNAUTHORIZED)
 
 #Métodos do Usuario
 class ListarUsuario(generics.ListAPIView):
@@ -130,27 +131,5 @@ class ListCreateServico(generics.ListCreateAPIView):
 	serializer_class = serializers.ServicoSerializer
 
 class RetrieveUpdateDestroyServico(generics.RetrieveUpdateDestroyAPIView):
-	queryset = models.Servico.objects.all()
-	serializer_class = serializers.ServicoSerializer
-
-#Métodos do Login
-class Login(generics.GenericAPIView):
-	serializer_class = serializers.UsuarioSerializer
-	def post(login, request):
-		queryset = models.Usuario.objects.filter(email=request.data['email'],senha=request.data['senha'])
-		if(queryset.count() == 1): 
-			#token = Token.objects.create(user=queryset[0])
-			#print token.key
-			usuario = {'id': queryset[0].id, 'primeiroNome': queryset[0].primeiroNome, 'segundoNome': queryset[0].segundoNome, 'idade': queryset[0].idade, 'email': queryset[0].email, 'descricaoUsuario': queryset[0].descricaoUsuario, 'regiao': queryset[0].regiao, 'estaPasseando': queryset[0].estaPasseando, 'tipousuario':[]}
-			#tipousuario = []
-			#for val in queryset[0].tipousuario.all():
-			#	tipousuario += val
-			#usuario['tipousuario'] = tipousuario
-			#print usuario
-			return JSONResponse({'result':'OK', 'usuario': usuario})
-		return JSONResponse({'result':'NOK', 'message': 'Login failed'})
-		
-
-class Logout(generics.RetrieveUpdateDestroyAPIView):
 	queryset = models.Servico.objects.all()
 	serializer_class = serializers.ServicoSerializer
