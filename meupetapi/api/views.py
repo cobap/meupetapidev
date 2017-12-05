@@ -7,6 +7,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from rest_framework.response import Response
 from rest_framework import status
+# from serializers import UsuarioSerializer
 
 from . import models
 from . import serializers
@@ -29,16 +30,16 @@ class RegistrarUsuario(generics.GenericAPIView):
 		user.segundoNome = request.data['segundoNome']
 		user.tipousuario = request.data['tipousuario']
 		user.save()
-		usuario_serializado = UsuarioSerializer(user)
-		return Response(usuario_serializado.data, status=status.HTTP_200_OK)
+		# usuario_serializado = UsuarioSerializer(user)
+		return Response({'result': 'ok'}, status=status.HTTP_200_OK)
 
 class VerificarUsuario(generics.GenericAPIView):
 	serializer_class = serializers.UsuarioSerializer
 	def post (login, request):
 		user = authenticate(username=request.data['username'],password=request.data['password'])
-		usuario_serializado = UsuarioSerializer(user)
+		# usuario_serializado = UsuarioSerializer(user)
 		if user is not None:
-			return Response(usuario_serializado.data, status=status.HTTP_200_OK)
+			return Response({'result': 'ok'}, status=status.HTTP_200_OK)
 		return Response({'result': 'User not Found'}, status=status.HTTP_401_UNAUTHORIZED)
 
 #Métodos do Usuario
