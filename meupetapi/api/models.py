@@ -64,7 +64,7 @@ class Servico(models.Model):
 		('T', 'Treinamento'),
 	)
 	tipoPasseio = models.CharField(max_length=1, choices=TIPO_PASSEIO)
-	passeador = models.ForeignKey(Passeador, on_delete=models.CASCADE, blank=True, default=None)
+	passeador = models.ForeignKey(Usuario, on_delete=models.CASCADE, blank=True, default=None)
 
 class Passeio(models.Model):
 	id = models.AutoField(primary_key=True)

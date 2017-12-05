@@ -31,7 +31,7 @@ class PasseioMethodTest(TestCase):
         url2 = reverse('api:servico_list')
         data2 = {'tipoPasseio': 'P', 'passeador': self.userId}
         servicoResponse = self.client.post(url2, data2, format='json')
-        #self.servicoId = servicoResponse.data['id']
+        self.servicoId = servicoResponse.data['id']
 
         url3 = reverse('api:pets_list')
         data3 = {'dono': self.userId, 'nome': 'Nome do Pet', 'raca': 'Raça 1','tamanho':'M','descricaoPet':'Pet exemplo'}
