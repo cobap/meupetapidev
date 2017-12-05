@@ -15,6 +15,7 @@ urlpatterns = [
 	url(r'^usuario/list/$', views.ListUsuario.as_view(), name='usuario_list'),
 	url(r'^usuario/(?P<pk>\d+)/rd/$', views.RetrieveDestroyUsuario.as_view(), name='usuario_detail_rd'),
 	url(r'^usuario/(?P<pk>\d+)/u/$', views.UpdateUsuario.as_view(), name='usuario_detail_u'),
+	url(r'^usuario/tipousuario/(?P<tipousuario>\d+)/$', views.GetUsuariosByTipoUsuario.as_view(), name='usuario_tipousuario'),
 
 	#URLs do Pet
 	url(r'^pet/$', views.ListCreatePet.as_view(), name='pets_list'),
@@ -33,12 +34,13 @@ urlpatterns = [
 
 	#URLs do TipoUsuario
 	url(r'^tipousuario/$', views.ListCreateTipoUsuario.as_view(), name='tipousuario_list'),
-	url(r'tipousuario/(?P<pk>\d+)/$', views.RetrieveUpdateDestroyTipoUsuario.as_view(), name='tipousuario_detail'),
+	url(r'^tipousuario/(?P<pk>\d+)/$', views.RetrieveUpdateDestroyTipoUsuario.as_view(), name='tipousuario_detail'),
 
 	#URLs do Servico
 	url(r'^servico/$', views.ListCreateServico.as_view(), name='servico_list'),
 	url(r'servico/(?P<pk>\d+)/$', views.RetrieveUpdateDestroyServico.as_view(), name='servico_detail'),
 	url(r'servico/passeador/(?P<passeador>\d+)/$', views.GetServicosByPasseador.as_view(), name='servico_passeador'),
+	url(r'servico/tiposervico/(?P<tiposervico>[\w\-]+)/$', views.GetServicosByTipoServico.as_view(), name='servico_tiposervico'),
 
 	url(r'^login/$', views.Login.as_view(), name='login'),
 
