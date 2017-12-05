@@ -21,7 +21,7 @@ class JSONResponse(HttpResponse):
 class RegistrarUsuario(generics.GenericAPIView):
 	serializer_class = serializers.UsuarioSerializer
 	def post (login, request):
-		user = models.Usuario.objects.create_user(request.data['username'],request.data['email'], request.data['password'])
+		user = models.Usuario.objects.create_user(request.data['username'],request.data['email'], request.data['password'], request.data['tipousuario'], request.data['primeiroNome'],request.data['segundoNome'])
 		user.save()
 		return JSONResponse({'result':1})
 
@@ -38,6 +38,9 @@ class ListarUsuario(generics.ListAPIView):
 	queryset = models.Usuario.objects.all()
 	serializer_class = serializers.UsuarioSerializer
 
+class RetrieveUpdateDestroyUsuario(generics.RetrieveUpdateDestroyAPIView):
+	queryset = models.Usuario.objects.all()
+	serializer_class = serializers.UsuarioSerializer
 
 #Métodos do Pet
 class ListCreatePet(generics.ListCreateAPIView):

@@ -16,6 +16,7 @@ urlpatterns = [
 	url(r'^usuario/registrar/$', views.RegistrarUsuario.as_view(), name='usuario_registrar'),
 	url(r'^usuario/login/$', views.VerificarUsuario.as_view(), name='usuario_verificar'),
 	url(r'^usuario/listar/$', views.ListarUsuario.as_view(), name='usuario_listar'),
+	url(r'^usuario/(?P<pk>\d+)/$', views.RetrieveUpdateDestroyUsuario.as_view(), name='usuario_detail'),
 
 	#URLs do Pet
 	url(r'^pet/$', views.ListCreatePet.as_view(), name='pets_list'),
