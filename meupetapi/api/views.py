@@ -108,6 +108,13 @@ class GetServicosByTipoServico(generics.ListAPIView):
 		queryset = models.Servico.objects.filter(tipoPasseio=self.kwargs['tiposervico'])
 		return queryset
 
+#provedores de servicos oferecidos por um tipo de servico
+class GetProvedoresServicosByTipoServico(generics.ListAPIView):
+	serializer_class = serializers.UsuarioSerializer
+	def get_queryset(self):
+		queryset = models.Usuario.objects.filter(servico__tipoPasseio=self.kwargs['tiposervico']).all()
+		return queryset
+
 #todos os passeios de todos os pets de um mesmo dono, para que ele possa programar sua agenda
 class GetPasseiosByDono(generics.ListAPIView):
 	serializer_class = serializers.PasseioSerializer

@@ -42,6 +42,7 @@ urlpatterns = [
 	url(r'servico/(?P<pk>\d+)/$', views.RetrieveUpdateDestroyServico.as_view(), name='servico_detail'),
 	url(r'servico/passeador/(?P<passeador>\d+)/$', views.GetServicosByPasseador.as_view(), name='servico_passeador'),
 	url(r'servico/tiposervico/(?P<tiposervico>[\w\-]+)/$', views.GetServicosByTipoServico.as_view(), name='servico_tiposervico'),
+	url(r'servico/provedortiposervico/(?P<tiposervico>[\w\-]+)/$', views.GetProvedoresServicosByTipoServico.as_view(), name='servico_tiposervico'),
 	
 	# jsi18n can be anything you like here
 	url(r'^jsi18n/$', JavaScriptCatalog.as_view(), js_info_dict),
