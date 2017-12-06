@@ -16,12 +16,7 @@ class Usuario(User):
 	regiao = models.CharField(max_length=100, default='')
 	estaPasseando = models.BooleanField(default=False)
 	tipousuario = models.ManyToManyField(TipoUsuario)
-	
-	# def __init__(self, primeiroNome, segundoNome, tipousuario):
-	# 	super(models.User, self).__init__(self, *args, **kwargs)
-	# 	self.primeiroNome = primeiroNome
-	# 	self.segundoNome = segundoNome
-	# 	self.tipousuario = tipousuario
+	imagemUsuario = models.ImageField(blank=True)
 
 	def __str__(self):
 		return self.primeiroNome
@@ -42,6 +37,7 @@ class Pet(models.Model):
 	raca = models.CharField(max_length=255)
 	tamanho = models.CharField(max_length=1, choices=TAM_CACHORRO)
 	descricaoPet = models.TextField(blank=True)
+	imagemPet = models.ImageField(blank=True)
 
 	def __str__(self):
 		return self.nome
@@ -54,6 +50,7 @@ class Passeador(models.Model):
 	regiao = models.CharField(max_length=100)
 	estaPasseando = models.BooleanField()
 	email = models.EmailField(max_length=255)
+	imagemPasseador = models.ImageField(blank=True)
 
 	def __str__(self):
 		return self.primeiroNome
