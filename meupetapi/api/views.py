@@ -29,6 +29,7 @@ class RegistrarUsuario(generics.GenericAPIView):
 		user.primeiroNome = request.data['primeiroNome']
 		user.segundoNome = request.data['segundoNome']
 		user.tipousuario = request.data['tipousuario']
+		user.imagemUsuario = request.data['imagemUsuario']
 		user.save()
 		usuario_serializado = serializers.UsuarioSerializer(user)
 		return Response(usuario_serializado.data, status=status.HTTP_200_OK)

@@ -28,6 +28,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
 			'segundoNome',
 			'email',
 			'tipousuario',
+			'imagemUsuario',
 		)
 		model = models.Usuario
 
@@ -40,6 +41,7 @@ class PetSerializer(serializers.ModelSerializer):
 			'dono',
 			'tamanho',
 			'descricaoPet',
+			'imagemPet',
 		)
 		model = models.Pet
 
@@ -53,6 +55,7 @@ class PasseadorSerializer(serializers.ModelSerializer):
 			'regiao',
 			'estaPasseando',
 			'email',
+			'imagemPasseador',
 		)
 		model = models.Passeador
 
