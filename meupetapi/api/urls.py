@@ -23,6 +23,7 @@ urlpatterns = [
 	url(r'^pet/$', views.ListCreatePet.as_view(), name='pets_list'),
 	url(r'^pet/(?P<pk>\d+)/$', views.RetrieveUpdateDestroyPet.as_view(), name='pets_detail'),
 	url(r'^pet/(?P<idPet>\d+)/picture/$', views.RetrieveFotoPet, name='pet_picture'),
+	url(r'^pet/usuario/(?P<idUsuario>\d+)/$', views.GetPetByUsuario.as_view(), name='pet_usuario'),
 
 	#URLs do Passeador
 	url(r'^passeador/$', views.ListCreatePasseador.as_view(), name='passeador_list'),

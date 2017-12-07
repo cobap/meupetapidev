@@ -112,6 +112,13 @@ class GetPasseiosByPasseador(generics.ListAPIView):
 		queryset = models.Passeio.objects.filter(servico__passeador=self.kwargs['passeador'])
 		return queryset
 
+#passeios de um passeador, para que ele possa planejar sua agenda
+class GetPetByUsuario(generics.ListAPIView):
+	serializer_class = serializers.PetSerializer
+	def get_queryset(self):
+		queryset = models.Pet.objects.filter(dono=self.kwargs['idUsuario'])
+		return queryset
+
 #servicos oferecidos por um passeador, para que eu possa buscar na hora de contratar
 class GetServicosByPasseador(generics.ListAPIView):
 	serializer_class = serializers.ServicoSerializer
