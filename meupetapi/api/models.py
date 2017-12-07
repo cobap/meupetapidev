@@ -66,6 +66,9 @@ class Servico(models.Model):
 	tipoPasseio = models.CharField(max_length=1, choices=TIPO_PASSEIO)
 	passeador = models.ForeignKey(Usuario, on_delete=models.CASCADE, blank=True, default=None)
 
+	class Meta:
+		unique_together = ('tipoPasseio', 'passeador',)
+
 class Passeio(models.Model):
 	id = models.AutoField(primary_key=True)
 	duracao = models.DurationField()
