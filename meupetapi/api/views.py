@@ -63,6 +63,14 @@ def RetrieveFotoUsuario(request,  idUsuario):
 
     return HttpResponse(resized_img, content_type="image/png")
 
+@api_view(['GET'])
+def RetrieveFotoPet(request,  idPet):
+
+    image = models.Pet.objects.get(id=idPet).imagemPet
+    resized_img = image #Handle resizing here
+
+    return HttpResponse(resized_img, content_type="image/png")
+
 #Métodos do Pet
 class ListCreatePet(generics.ListCreateAPIView):
 	queryset = models.Pet.objects.all()
