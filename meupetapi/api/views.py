@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate
 from rest_framework.response import Response
 from rest_framework import status
 # from serializers import UsuarioSerializer
+from rest_framework.decorators import api_view
 
 from . import models
 from . import serializers
@@ -53,6 +54,14 @@ class ListarUsuario(generics.ListAPIView):
 class RetrieveUpdateDestroyUsuario(generics.RetrieveUpdateDestroyAPIView):
 	queryset = models.Usuario.objects.all()
 	serializer_class = serializers.UsuarioSerializer
+
+@api_view(['GET'])
+def RetrieveFotoUsuario(request,  idUsuario):
+
+    image = models.Usuario.objects.get(id=idUsuario).imagemUsuario
+    resized_img = image #Handle resizing here
+
+    return HttpResponse(resized_img, content_type="image/png")
 
 #Métodos do Pet
 class ListCreatePet(generics.ListCreateAPIView):
